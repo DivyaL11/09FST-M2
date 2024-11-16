@@ -1,5 +1,5 @@
 -- Load input file from HDFS
-inputFile = LOAD 'hdfs:///user/poulami/input.txt' AS (line);
+inputFile = LOAD 'hdfs:///user/lokeray/input.txt' AS (line);
 -- Tokeize each word in the file (Map)
 words = FOREACH inputFile GENERATE FLATTEN(TOKENIZE(line)) AS word;
 -- Combine the words from the above stage
@@ -9,4 +9,4 @@ cntd = FOREACH grpd GENERATE group, COUNT(words);
 --Remove th eold results folder
 rmf hdfs:///user/poulami/PigResult;
 -- Store the result in HDFS
-STORE cntd INTO 'hdfs:///user/poulami/PigResult';
+STORE cntd INTO 'hdfs:///user/lokeray/PigResult';
